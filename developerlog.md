@@ -36,9 +36,11 @@ I found a function called GET_WORKING_DAYS
 I hoped that it would be simple as switching out the days_between function for the get_working_days function, i.e. 
 
 ```
- l_total_days = get_working_days(PAY_EARN_PERIOD_END, PAY_EARN_PERIOD_START ) + 1
- l_days = days_between(prorate_end , prorate_start) + 1
+ l_total_days = get_working_days(PAY_EARN_PERIOD_END, PAY_EARN_PERIOD_START )
+ l_days = days_between(prorate_end , prorate_start)
  l_value = (l_value / l_total_days) * l_days
+
+/*The revised code does not require the +1 to be appended to the end as the get_working_days function is counting the first and last date*/
 ```
 
 The formula compiled successfully but the quick pay went into error:
