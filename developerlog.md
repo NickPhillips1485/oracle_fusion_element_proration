@@ -35,9 +35,11 @@ I found a function called GET_WORKING_DAYS
 
 I hoped that it would be simple as switching out the days_between function for the get_working_days function, i.e. 
 
+```
  l_total_days = get_working_days(PAY_EARN_PERIOD_END, PAY_EARN_PERIOD_START ) + 1
  l_days = days_between(prorate_end , prorate_start) + 1
  l_value = (l_value / l_total_days) * l_days
+```
 
 The formula compiled successfully but the quick pay went into error:
 
@@ -46,15 +48,16 @@ Formula GLB_EARN_PRORATION_HOUSING2, line 230, a number was divided by zero whil
 This suggests it was extracting a zero value for l_total days. I couldn't see a way around this and nearly gave up but in the end decided on a solution which
 hard-coded those dates. Admittedly this wouldn't be acceptable for a production solution as those dates would need to be called dynamically, but it was the best I could do.  
 
-/* Debugging: Assign specific dates for March */
-```l_first_day_of_month = to_date('2026-03-01', 'YYYY-MM-DD')
-   l_last_day_of_month = to_date('2026-03-31', 'YYYY-MM-DD')```
-
 ```
+/* Debugging: Assign specific dates for March */
+l_first_day_of_month = to_date('2026-03-01', 'YYYY-MM-DD')
+   l_last_day_of_month = to_date('2026-03-31', 'YYYY-MM-DD')
+
+
 l_total_working_days = GET_WORKING_DAYS(l_first_day_of_month, l_last_day_of_month)
          l_days = get_working_days(prorate_start, prorate_end)
-		 l_value = (l_value / l_total_working_days) * l_days```
-
+		 l_value = (l_value / l_total_working_days) * l_days
+```
 
 The revised formula was added to the element setup:
 Proration Group: Entry Changes for Proration
